@@ -1,55 +1,41 @@
+<template>
+  <div class="container">
+    <input v-model="research" @keyup.enter="apicall(research)" placeholder="Rechercher" >
+    <div class="box" v-if="result">
+      <div class="box-book">
+        <img :src="result.volumeInfo.imageLinks.thumbnail" />
+      </div>
+      <div class="box-info">
+        <div class="box-title">
+          {{ result.volumeInfo.title }}
+        </div>
+        <div class="box-author">
+          {{ result.volumeInfo.authors.join(', ') }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup>
 import axios from 'axios';
-import { ref, onMounted} from 'vue';
-
-
-"https://www.googleapis.com/books/v1/volumes?q="
+import { ref } from 'vue';
 
 let result = ref(null);
-let data = ref(null);
-const search = ref("");
-const  research = ref("");
-const baseurl = "https://www.googleapis.com/books/v1/volumes?q=";
+let research = ref("");
 
-
-
-
-function apicall(search) {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q="+search)
-      .then((data  => result.value = data));
-
-      return {result}
+async function apicall(search) {
+  try {
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}`);
+    if (response.data.items && response.data.items.length > 0) {
+      result.value = response.data.items[0];
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-
 </script>
-
-
-<template>
-        <div class="container">
-        <input v-model="research" v-on:keyup.enter="apicall(research)" placeholder="Rechercher" >
-        <div class="box">
-          <div class="box-book">
-            <img src="http://books.google.com/books/content?id=GBl6MWssicEC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-          </div>
-          <div class="box-info">
-
-        
-            <div class="box-title">
-            Harry Potter and the Chamber of secret
-          
-          </div>
-          <div class="box-author">
-            J.K. Rowling
-          </div>
-          </div>
-        </div>
-    </div>
-
-    {{result}}
-    
-
-</template>
 
 
 <style>
