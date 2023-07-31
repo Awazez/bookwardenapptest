@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <input v-model="research" @keyup.enter="apicall(research)" placeholder="Rechercher" >
-    <div class="box" v-if="result">
+    <input v-model="research" @keyup.enter="apicall(research)" placeholder="Rechercher">
+    <div class="box" v-for="(book, index) in result" :key="index">
       <div class="box-book">
-        <img :src="result.volumeInfo.imageLinks.thumbnail" />
+        <img :src="book.volumeInfo.imageLinks.thumbnail" alt="Book cover">
       </div>
       <div class="box-info">
         <div class="box-title">
-          {{ result.volumeInfo.title }}
+          {{ book.volumeInfo.title }}
         </div>
         <div class="box-author">
-          {{ result.volumeInfo.authors.join(', ') }}
+          {{ book.volumeInfo.authors.join(', ') }}
         </div>
       </div>
     </div>
@@ -21,20 +21,22 @@
 import axios from 'axios';
 import { ref } from 'vue';
 
-let result = ref(null);
+let result = ref([]);
 let research = ref("");
 
 async function apicall(search) {
   try {
     const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}`);
-    if (response.data.items && response.data.items.length > 0) {
-      result.value = response.data.items[0];
+    if (response.data.items) {
+      result.value = response.data.items;
+    } else {
+      result.value = [];
     }
   } catch (err) {
     console.error(err);
+    result.value = [];
   }
 }
-
 </script>
 
 
