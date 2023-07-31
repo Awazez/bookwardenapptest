@@ -8,10 +8,12 @@
       </div>
       <div class="box-info">
         <div class="box-title">
-          {{ book.volumeInfo.title }}
-          <svg class="heart" :class="{ 'filled': isHeartFilled[index] }" @click="toggleHeart(index)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 4.435c-1.989-2.48-5.1-2.063-6.879-.279-2.25-2.25-6.209-2.159-8.121.753-1.898 2.875-.566 6.787 2.217 8.571l9.668 9.592 9.764-9.688c2.778-2.783 4.107-6.695 2.217-8.571-1.912-2.916-5.867-3.002-8.121-.753-1.848-1.849-4.916-2.23-7.146-.625z"/>
-          </svg>
+          <div class="title-content">
+            {{ book.volumeInfo.title }}
+            <svg class="heart" :class="{ 'filled': isHeartFilled[index] }" @click="toggleHeart(index)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 4.435c-1.989-2.48-5.1-2.063-6.879-.279-2.25-2.25-6.209-2.159-8.121.753-1.898 2.875-.566 6.787 2.217 8.571l9.668 9.592 9.764-9.688c2.778-2.783 4.107-6.695 2.217-8.571-1.912-2.916-5.867-3.002-8.121-.753-1.848-1.849-4.916-2.23-7.146-.625z"/>
+            </svg>
+          </div>
         </div>
         <div class="box-author">
           {{ book.volumeInfo.authors?.join(', ') }}
@@ -115,17 +117,23 @@ textarea:focus, input:focus{
     outline: none;
 }
 
+.title-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .heart {
   fill: none;
   stroke: red;
   stroke-width: 2px;
   cursor: pointer;
+  margin-left: 1rem; /* Add some space between the title and the heart */
 }
 
 .heart.filled {
   fill: red;
 }
-
 
 
 </style>
