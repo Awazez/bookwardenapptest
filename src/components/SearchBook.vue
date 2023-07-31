@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <input v-model="research" @keyup.enter="apicall(research)" placeholder="Rechercher" >
-    <div class="box" v-if="result">
+    <input v-model="research" @keyup.enter="apicall(research)" placeholder="Rechercher">
+    <div class="box" v-for="(book, index) in result.slice(0, 10)" :key="index">
       <div class="box-book">
-        <img :src="result.volumeInfo.imageLinks.thumbnail" />
+        <img :src="book.volumeInfo.imageLinks?.thumbnail" alt="Book cover">
       </div>
       <div class="box-info">
         <div class="box-title">
-          {{ result.volumeInfo.title }}
+          {{ book.volumeInfo.title }}
         </div>
         <div class="box-author">
-          {{ result.volumeInfo.authors.join(', ') }}
+          {{ book.volumeInfo.authors?.join(', ') }}
         </div>
       </div>
     </div>
