@@ -5,9 +5,10 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <body>
     <header class="wrapper">
+      <div class="logo">BKW</div>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/" class="titles">Search</RouterLink>
+        <RouterLink to="/about" class="titles">Liked</RouterLink>
       </nav>
       
 
@@ -23,7 +24,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style>
 
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,900&display=swap');
 
 * {
     margin: 0;
@@ -42,9 +43,34 @@ body {
   width: 100%;
   height: 3rem;
   margin: none;
+  display: flex;
+  align-items: center;
+  justify-content:space-evenly;
 }
 
+.logo {
+    color: #ffff;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    padding-left: 10px;
+    padding-top: 2px;
+    text-decoration: none
 
+}
+
+.titles {
+    color: #ffff;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    padding-left: 10px;
+    padding-top: 2px;
+    text-decoration: none
+
+}
 
 
 </style>
