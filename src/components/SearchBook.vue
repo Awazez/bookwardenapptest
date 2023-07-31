@@ -3,7 +3,9 @@
     <input v-model="research" @keyup.enter="apicall(research)" placeholder="Rechercher">
     <div class="box" v-for="(book, index) in result" :key="index">
       <div class="box-book">
-        <img :src="book.volumeInfo.imageLinks?.thumbnail" alt="Book cover">
+        <img v-if="book.volumeInfo.imageLinks" :src="book.volumeInfo.imageLinks.thumbnail" alt="Book cover">
+        <img v-else :src="defaultBookCover" alt="Default book cover"> 
+      </div>
       </div>
       <div class="box-info">
         <div class="box-title">
@@ -20,6 +22,7 @@
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue';
+import defaultBookCover from '../assets/livres.png';
 
 let result = ref([]);
 let research = ref("");
