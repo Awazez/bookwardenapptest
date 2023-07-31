@@ -4,8 +4,7 @@
     <div class="box" v-for="(book, index) in result" :key="index">
       <div class="box-book">
         <img v-if="book.volumeInfo.imageLinks" :src="book.volumeInfo.imageLinks.thumbnail" alt="Book cover">
-        <img v-else :src="defaultBookCover" alt="Default book cover"> 
-      </div>
+        <img v-else :src="defaultBookCover" alt="Default book cover">
       </div>
       <div class="box-info">
         <div class="box-title">
