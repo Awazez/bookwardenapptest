@@ -41,7 +41,7 @@ async function apicall(search) {
 }
 </script>
 
-<style>
+<style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque&display=swap');
 
