@@ -243,6 +243,7 @@ textarea:focus, input:focus{
   border: 1px solid #aaa;
   border-radius: 4px;
   background: white;
+  margin-top: 100px;
   z-index: 1;
 }
 
