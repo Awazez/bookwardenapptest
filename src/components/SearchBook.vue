@@ -1,11 +1,6 @@
 <template>
   <div class="container">
-    <input v-model="search" @input="fetchBooks" @keyup.enter="apicall(research)" placeholder="Rechercher">
-<div class="autocomplete" v-if="suggestions.length">
-  <div class="suggestion" v-for="(book, index) in suggestions" :key="index" @click="selectSuggestion(book)">
-    {{ book.volumeInfo.title }}
-  </div>
-</div>
+    <input v-model="search"  @keyup.enter="apicall(search)" placeholder="Rechercher">
     <div class="box" v-for="(book, index) in result" :key="index">
       <div class="box-book">
         <img v-if="book.volumeInfo.imageLinks" :src="book.volumeInfo.imageLinks.thumbnail" alt="Book cover">
@@ -50,30 +45,6 @@ let selectedBook = ref(null);
 let isHeartFilled = reactive({});
 
 let search = ref('');
-let suggestions = ref([]);
-
-async function fetchBooks() {
-  try {
-    if (search.value) {
-      const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search.value}&maxResults=5`);
-      if (response.data.items) {
-        suggestions.value = response.data.items;
-      } else {
-        suggestions.value = [];
-      }
-    } else {
-      suggestions.value = [];
-    }
-  } catch (err) {
-    console.error(err);
-    suggestions.value = [];
-  }
-}
-
-function selectSuggestion(book) {
-  search.value = book.volumeInfo.title;
-  suggestions.value = [];
-}
 
 async function apicall(search) {
   try {
@@ -237,23 +208,5 @@ textarea:focus, input:focus{
   cursor: pointer;
 }
 
-.autocomplete {
-  position: absolute;
-  width: 200px; /* match the width of the search bar */
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  background: white;
-  margin-top: 250px;
-  z-index: 1;
-}
-
-.suggestion {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.suggestion:hover {
-  background: #ddd;
-}
 
 </style>
