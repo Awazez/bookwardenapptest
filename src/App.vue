@@ -7,8 +7,9 @@ import { RouterLink, RouterView } from 'vue-router'
     <header class="wrapper">
       <div class="logo">BKW</div>
       <nav>
-        <RouterLink to="/" class="titles">Search</RouterLink>
-        <RouterLink to="/about" class="titles">Liked</RouterLink>
+        <RouterLink to="/" class="titles">RECHERCHE</RouterLink>
+        <RouterLink to="/about" class="titles">LISTES</RouterLink>
+        <RouterLink to="/login" class="titles">LOG IN</RouterLink>
       </nav>
       
 
@@ -45,7 +46,7 @@ body {
   margin: none;
   display: flex;
   align-items: center;
-  justify-content:space-evenly;
+  justify-content:space-around;
 }
 
 .logo {

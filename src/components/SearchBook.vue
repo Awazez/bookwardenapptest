@@ -137,6 +137,7 @@ img {
 
 .box-title {
   font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 800;
   margin-left: 2rem;
   font-size: 18px;
   font-weight: bold;
