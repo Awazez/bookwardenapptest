@@ -15,9 +15,6 @@
           <span @click="ClearSearch" class="text-deepsaffron cursorpointer snipcss0-2-6-7">
             [ clear ]
           </span>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#idyllumModalUnified" class="snipcss0-2-6-8">
-            [ Examples &amp; How to? ]
-          </a>
         </p>
       </div>
       <div class="subtitle-input col-12 col-xl-8">
@@ -30,7 +27,15 @@
       </div>
     </div>
   </div>
-  <div v-if="isLoading" class="spinner">Chargement...</div>
+  <div  v-if="isLoading"  class="alert idyllum-norton alert-info snipcss-O6XxM" id="idyllum-statusbot">
+  <span class="text-deepsaffron">
+    bot@bookwardenlabs:~$
+  </span>
+  <span id="message">
+   Nous sommes entrain de réaliser la recherche  {{search}}
+  </span>
+
+</div>
   <div v-if="noResults" class="alert">Aucun résultat trouvé pour votre recherche.</div>
 </template>
 
@@ -93,77 +98,60 @@ function ClearSearch() {
     search.value = '';
 }
 </script>
-<style scoped>@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap'); 
-body {  
-  font-family:var(--bs-body-font-family);
-  font-size:var(--bs-body-font-size);
-  font-weight:var(--bs-body-font-weight);
-  line-height:var(--bs-body-line-height);
-  color:var(--bs-body-color);
-  text-align:var(--bs-body-text-align);
-  background:#0A0414;
-  background-image:url('https://www.idyllum.com/static/images/Idyllum-bg-pattern.png?fc97e56d6849');
-}  
-body { 
-/* CSS Variables that may have been missed get put on body */ 
-  --bs-gutter-x:  1.5rem;  
-  --bs-gutter-y:  0;  
-  --bs-btn-padding-x:  0.75rem;  
-  --bs-btn-padding-y:  0.375rem;  
-  --bs-btn-font-size:  1rem;  
-  --bs-btn-font-weight:  400;  
-  --bs-btn-line-height:  1.5;  
-  --bs-btn-color:  #212529;  
-  --bs-btn-bg:  transparent;  
-  --bs-btn-border-width:  1px;  
-  --bs-btn-border-color:  transparent;  
-  --bs-btn-border-radius:  0.375rem;  
-  --bs-btn-hover-border-color:  transparent;  
-  --bs-btn-focus-box-shadow:  0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb),.5);  
-} 
+<style scoped>
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap'); 
 
-* { 
-  box-sizing: border-box;
-} 
-
-body { 
-  margin: 0; 
-  font-family: var(--bs-body-font-family); 
-  font-size: var(--bs-body-font-size); 
-  font-weight: var(--bs-body-font-weight); 
-  line-height: var(--bs-body-line-height); 
-  color: var(--bs-body-color); 
-  text-align: var(--bs-body-text-align); 
-  background-color: var(--bs-body-bg); 
-  -webkit-text-size-adjust: 100%; 
-  -webkit-tap-highlight-color: transparent;
-} 
-
-body { 
-  color: #fff; 
-  background: #0A0414; 
-  background-image: url('https://www.idyllum.com/static/images/Idyllum-bg-pattern.png?fc97e56d6849'); 
-  font-family: 'IBM Plex Mono',monospace; 
-  font-weight: 400;
-} 
-
-:root { 
-  --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; 
-  --bs-body-font-family: var(--bs-font-sans-serif); 
-  --bs-body-font-size: 1rem; 
-  --bs-body-font-weight: 400; 
-  --bs-body-line-height: 1.5; 
-  --bs-body-color: #212529; 
-  --bs-body-bg: #fff; 
-  --bs-link-color: #0d6efd; 
-  --bs-link-hover-color: #0a58ca; 
-} 
 
 @media (prefers-reduced-motion: no-preference){ 
 :root { 
   scroll-behavior: smooth;
 } 
-}     
+}      
+
+.alert { 
+    --bs-alert-bg: transparent; 
+    --bs-alert-padding-x: 1rem; 
+    --bs-alert-padding-y: 1rem; 
+    --bs-alert-margin-bottom: 1rem; 
+    --bs-alert-color: inherit; 
+    --bs-alert-border-color: transparent; 
+    --bs-alert-border: 1px solid var(--bs-alert-border-color); 
+    --bs-alert-border-radius: 0.375rem; 
+    position: relative; 
+    padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x); 
+    margin-bottom: var(--bs-alert-margin-bottom); 
+    color: var(--bs-alert-color); 
+    background-color: var(--bs-alert-bg); 
+    border: var(--bs-alert-border); 
+    border-radius: var(--bs-alert-border-radius);
+} 
+
+.alert-info { 
+    --bs-alert-color: #055160; 
+    --bs-alert-bg: #cff4fc; 
+    --bs-alert-border-color: #b6effb;
+} 
+
+.alert { 
+    border-radius: 0; 
+    background: #0a0414; 
+    color: #fff; 
+    padding: 0.5rem 1rem; 
+    margin-bottom: 1.5rem;
+} 
+
+.alert-info { 
+    border: 1px solid #2EE5B5; 
+    box-shadow: 0 0 2px rgb(46 229 181 / 90%),0 0 4px rgb(46 229 181 / 40%),0 0 1rem rgb(46 229 181 / 30%),0 0 4rem rgb(46 229 181 / 10%);
+} 
+
+*,:after,:before { 
+    box-sizing: border-box;
+} 
+
+.text-deepsaffron { 
+    color: #FF931E;
+} 
 
 .mb-4 { 
   margin-bottom: 1.5rem!important;

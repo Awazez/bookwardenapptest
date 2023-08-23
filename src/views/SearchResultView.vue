@@ -23,8 +23,9 @@
           <br>
           Publisher: {{ book.volumeInfo.publisher }}
           <br>
+          ISBN: {{ getISBN(book.volumeInfo.industryIdentifiers) }}
+          <br>
           Description: {{ truncate(book.volumeInfo.description, 500) }}
-          
         </div>
         <div class="horizontal-bar"></div>
       </div>
@@ -64,6 +65,13 @@
       }
       return text;
   };
+
+  const getISBN = (identifiers) => {
+  if (!identifiers) return 'N/A';
+
+  const isbn13 = identifiers.find(identifier => identifier.type === "ISBN_13");
+  return isbn13 ? isbn13.identifier : 'N/A';
+};
   
   </script>
 

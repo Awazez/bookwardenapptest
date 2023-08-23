@@ -2,10 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router';
 </script>
 
-
-
 <template>
-<nav class="navbar navbar-expand-lg idyllum-navbar py-3 noprint snipcss-s2Ydo" aria-label="Idyllum Labs main navbar">
+<nav class="navbar navbar-expand-lg idyllum-navbar py-3">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <img src="../assets/logo.svg" alt="Idyllum Labs - The real website vulnerability scanner. Use OWASP ZAP, Nmap, WhatWeb &amp; TLS scanners online!" class="idyllum_logo">
@@ -17,14 +15,16 @@ import { RouterLink, RouterView } from 'vue-router';
     <div class="collapse navbar-collapse" id="idyllumNav">
       <ul class="navbar-nav ms-auto mb-2 mt-5 mb-lg-0 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/explore/">
+          <RouterLink to="/">
+          <a class="nav-link">
             <div class="lefty">
               <img src="https://www.idyllum.com/static/images/Idyllum_icon-target_C.svg" alt="Run a free OWASP ZAP website security check at Idyllum Labs">
             </div>
             <div class="righty">
-              Explore
+              Recherche
             </div>
           </a>
+        </RouterLink>
         </li>
         <li class="nav-item d-none">
           <a class="nav-link" href="/realtime/">
@@ -42,7 +42,7 @@ import { RouterLink, RouterView } from 'vue-router';
               <img src="https://www.idyllum.com/static/images/Idyllum_icon-folder_C.svg" alt="Browse security reports by used software">
             </div>
             <div class="righty">
-              Browse
+              Listes
             </div>
           </a>
         </li>
@@ -180,10 +180,6 @@ body {
     --bs-navbar-toggler-border-radius: 0.375rem; 
     --bs-navbar-toggler-transition: box-shadow 0.15s ease-in-out; 
     position: relative; 
-    display: flex; 
-    flex-wrap: wrap; 
-    align-items: center; 
-    justify-content: space-between; 
     padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
 } 
 

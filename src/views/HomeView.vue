@@ -1,20 +1,18 @@
 <script setup>
-import SearchBook from '../components/SearchBook.vue';
 import SearchBar from '../components/SearchBar.vue';
 import TerminalBar from '../components/TerminalBar.vue';
-import ResearchResult from '../components/ResearchResult.vue'
 
 </script>
 
 <template>
-   <SearchBar/>
-   <TerminalBar/>
-   <ResearchResult/>
+  
   <main>
+    <SearchBar/>
+   <TerminalBar/>
   </main>
 </template>
 
-<style scoped>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
 
 
