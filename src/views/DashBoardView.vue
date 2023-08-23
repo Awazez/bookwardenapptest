@@ -1,36 +1,45 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { getAuth } from 'firebase/auth';
+
+const userName = ref("");
+const auth = getAuth();
+const userInfo =  auth.currentUser; 
+const user =  userInfo.email; 
+
+
 
 </script>
 
 <template>
+<div class="member-area">
+  <h1># Member area</h1>
+</div>
+  
+<div class="manage-account">
 
-  <h1># Espace membre</h1>
-    <div class="container-signIn">
-  <div class="box-signIn">
-    # Create your Bookwarden account
+  ## Manage account
+  <br>
+  ---------------------- <br>
+  User : {{ user }} <br>
+  [ Manage e-mail settings ]<br>
+  [ Set and change password ]<br>
+  [ Manage social accounts ]<br>
+  [ Log out ]<br>
 </div>
-</div>
-<div class="container">
-  <div class="box">
-    <p>
-        Authenticated users can initiate rescans, explore our datasets without limitations, and set up monitoring for a fleet of sites.<br>
-        Idyllum Labs is a free service. And we won't ask for your credit card ;) <br>
-        Already have an account? Please <RouterLink to="/register" class="link" style="color: red;">sign in. </RouterLink><br>
-    </p>
- 
-</div>
-</div>
-
-    <h1>Create an Account</h1>
-    <p><input type="text" placeholder="Email" v-model="email"/></p>
-    <p><input type="password" placeholder="Password" v-model="password"/></p>
-    <p><button @click="register">Submit</button></p>
-    <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+  
 </template>
 
-<style>
+<style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque&display=swap');
+
+
+
+h1 {
+  font-size: 24px;
+  color: #0b1c4a;
+}
 
 .container-signIn {
   display: flex;
@@ -66,6 +75,29 @@
   justify-content: center;
 }
 
+.manage-account {
+  background-color: #eed4dc;
+  font-family: 'Darker Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  width: 25rem;
+  height: 14rem;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 3rem;
+}
+
+.member-area {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  width: 25rem;
+  height: 3rem;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
 
 </style>
 

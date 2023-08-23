@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <input v-model="search"  @keyup.enter="apicall(search)" placeholder="Rechercher">
+      <input v-model="search"  @keyup.enter="apicall(search)" placeholder="Rechercher">
+    
     <div class="box" v-for="(book, index) in result" :key="index">
       <div class="box-book">
         <img v-if="book.volumeInfo.imageLinks" :src="book.volumeInfo.imageLinks.thumbnail" alt="Book cover">
@@ -95,12 +96,19 @@ function truncateText(text, limit) {
  margin-top: 1rem;
 
 }
+.input-container {
+  background-color: #0A0414;
+  width: auto;
+  height: 25rem;
+  border: none;
+}
+
+
 
 input {
-  background-color: #eed4dc;
-  width: 15rem;
+  background-color: white;
+  width: 4rem;
   height: 1rem;
-  border-radius: 20px;
   padding: 10px;
   border: none;
 }

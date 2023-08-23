@@ -52,7 +52,7 @@ const signInWithGoogle = () => {
 
 
 <template>
-
+<div class="container-global"> 
 <div class="container-signIn">
   <div class="box-signIn">
     # Sign In to Bookwarden
@@ -66,21 +66,33 @@ const signInWithGoogle = () => {
     </p>
  
 </div>
-
-
-<h1>Sign In</h1>
+</div>
+<div>
+  <label>E-mail:</label>
     <p><input type="text" placeholder="Email" v-model="email"/></p>
+    <label>Password:</label>
     <p><input type="password" placeholder="Password" v-model="password"/></p>
     <p><button @click="signIn">Sign In</button></p>
     <p><button @click="signInWithGoogle">Sign In With Google</button></p>
-</div>
 
+</div>
+</div>
 
 </template>
 
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque&display=swap');
+
+
+
+.container-global{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+}
 
 .container-signIn {
   display: flex;
