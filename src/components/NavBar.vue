@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 
+
 <template>
 <nav class="navbar navbar-expand-lg idyllum-navbar py-3 noprint snipcss-s2Ydo" aria-label="Idyllum Labs main navbar">
   <div class="container-fluid">
