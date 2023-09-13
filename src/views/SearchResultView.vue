@@ -1,79 +1,104 @@
 <template>
     <SearchBar/>
     <div class="terminal p-4 mb-4 snipcss-fKFOt">
-      <div class="row mb-3">
-        <div class="col-12">
-          <h1># Résultat de recherche</h1>
-          <div class="horizontal-bar"></div>
-          <br>
+        <div class="row mb-3">
+            <div class="col-12">
+                <h1># Résultat de recherche</h1>
+                <div class="horizontal-bar"></div>
+                <br>
+            </div>
         </div>
-      </div>
-
-      <div class="row mb-3 position-relative" v-for="book in results" :key="book.id">
-        <!-- Image Section for Book Thumbnail -->
-        <div class="col-12 col-lg-5 col-xl-3 small mb-3">
-            <img v-if="book.volumeInfo.imageLinks" :src="book.volumeInfo.imageLinks.thumbnail" alt="Book cover">
-            <img v-else src="https://via.placeholder.com/150x200.png?text=Pas+d%27image" alt="Default book cover">
+        <div class="row mb-3 position-relative" v-for="book in books" :key="book.id">
+            <div class="col-12 col-lg-5 col-xl-3 small mb-3">
+                <img v-if="book.volumeInfo.imageLinks" :src="book.volumeInfo.imageLinks.thumbnail" alt="Book cover">
+                <img v-else src="https://via.placeholder.com/150x200.png?text=Pas+d%27image" alt="Default book cover">
+            </div>
+            <div style="color: white;" class="col-12 col-lg-7 col-xl-9 small mb-3">
+                <h2 class="mb-1 heading-no-decoration text-break">
+                    {{ book.volumeInfo.title }}
+                    <svg class="heart" :class="{ 'filled': isHeartFilled[book.id] }" @click="toggleHeart(book)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 29.6">
+            <path d="M16,28.9C12.7,25.7,1.8,15.6,1.8,9.3C1.8,5.2,5.3,1.8,9.5,1.8c2.7,0,5.3,1.5,6.6,3.8c1.3-2.3,3.9-3.8,6.6-3.8c4.2,0,7.7,3.4,7.7,7.6c0,6.3-10.9,16.4-14.2,19.6L16,28.9L16,28.9z"/>
+        </svg>
+                </h2>
+                <div>
+                    Authors: {{ book.volumeInfo.authors.join(', ') }}
+                    <br>
+                    Publisher: {{ book.volumeInfo.publisher }}
+                    <br>
+                    ISBN: {{ getISBN(book.volumeInfo.industryIdentifiers) }}
+                    <br>
+                    Description: {{ truncate(book.volumeInfo.description, 500) }}
+                </div>
+            </div>
+            <div class="horizontal-bar"></div>
         </div>
-
-        <!-- Information Section -->
-        <div style="color: white;" class="col-12 col-lg-7 col-xl-9 small mb-3">
-          <h2 class="mb-1 heading-no-decoration text-break">{{ book.volumeInfo.title }}</h2>
-          Authors: {{ book.volumeInfo.authors.join(', ') }}
-          <br>
-          Publisher: {{ book.volumeInfo.publisher }}
-          <br>
-          ISBN: {{ getISBN(book.volumeInfo.industryIdentifiers) }}
-          <br>
-          Description: {{ truncate(book.volumeInfo.description, 500) }}
-        </div>
-        <div class="horizontal-bar"></div>
-      </div>
     </div>
 </template>
   
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useRoute } from 'vue-router';
-  import SearchBar from '../components/SearchBar.vue';
-  import defaultBookCover from '../assets/livres.png'
-  import axios from 'axios';
-  
-  const results = ref([]);
-  
-  const route = useRoute();
-  
-  onMounted(async () => {
-      try {
-        const searchTerm = route.query.q;
-        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=15`);
-  
-        if (response.data.items) {
-          results.value = response.data.items;
-        } else {
-          results.value = [];
-        }
-      } catch (err) {
-        console.error(err);
-        results.value = [];
-      }
-  });
-  
-  const truncate = (text, length) => {
-      if (text && text.length > length) {
-        return text.substring(0, length) + '...';
-      }
-      return text;
-  };
+<script setup>
+import { ref, reactive, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import SearchBar from '../components/SearchBar.vue';
+import axios from 'axios';
+import { getDatabase, ref as dbRef, set, remove, onValue } from 'firebase/database';
 
-  const getISBN = (identifiers) => {
-  if (!identifiers) return 'N/A';
+const db = getDatabase(); 
+const books = ref([]);
+const isHeartFilled = reactive({});
+const route = useRoute();
 
-  const isbn13 = identifiers.find(identifier => identifier.type === "ISBN_13");
-  return isbn13 ? isbn13.identifier : 'N/A';
+const fetchData = async () => {
+    const searchTerm = route.query.q;
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=15`);
+
+    if (response.data.items) {
+        books.value = response.data.items;
+        initializeHeartStatus();
+    } else {
+        books.value = [];
+    }
+}
+
+const getISBN = (identifiers) => {
+    const isbn13 = identifiers?.find(identifier => identifier.type === "ISBN_13");
+    return isbn13 ? isbn13.identifier : 'N/A';
 };
-  
-  </script>
+
+const truncate = (text, length) => text && text.length > length ? text.substring(0, length) + '...' : text;
+
+const initializeHeartStatus = () => {
+    const favoritesRef = dbRef(db, 'favorites');
+    onValue(favoritesRef, (snapshot) => {
+        const favs = snapshot.val();
+        books.value.forEach(book => {
+            isHeartFilled[book.id] = favs && favs[book.id];
+        });
+    });
+}
+
+const toggleHeart = (book) => {
+    isHeartFilled[book.id] = !isHeartFilled[book.id];
+    console.log(book.id)
+
+    if (isHeartFilled[book.id]) {
+        const bookToSave = {
+            ...book.volumeInfo,
+            ISBN: getISBN(book.volumeInfo.industryIdentifiers)
+        };
+        set(dbRef(db, 'favorites/' + book.id), bookToSave)
+            .catch(error => {
+                console.error("Erreur lors de la sauvegarde dans Firebase:", error);
+            });
+    } else {
+        remove(dbRef(db, 'favorites/' + book.id))
+            .catch(error => {
+                console.error("Erreur lors de la suppression dans Firebase:", error);
+            });
+    }
+}
+
+onMounted(fetchData);
+</script>
 
 <style scoped>  
 body {  
@@ -161,6 +186,22 @@ body {
     border-top: 2px dashed #FF931E; /* Bordure pointillée */
     width: 100%; /* Largeur de la barre */
 }
+
+.heart {
+  width: 28px;
+  height: 15px;
+  margin-right: 10px;
+  fill: none;
+  stroke: white;
+  stroke-width: 2px;
+  cursor: pointer;
+}
+
+.heart.filled {
+    stroke: #2EE5B5;
+    fill: #2EE5B5; /* Fill color when heart is "liked" */
+}
+
 @media (prefers-reduced-motion: no-preference){ 
   :root { 
     scroll-behavior: smooth;

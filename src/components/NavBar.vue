@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -15,15 +15,13 @@ import { RouterLink, RouterView } from 'vue-router';
     <div class="collapse navbar-collapse" id="idyllumNav">
       <ul class="navbar-nav ms-auto mb-2 mt-5 mb-lg-0 mt-lg-0">
         <li class="nav-item">
-          <RouterLink to="/">
-          <a class="nav-link">
+          <RouterLink to="/" class="nav-link">
             <div class="lefty">
               <img src="https://www.idyllum.com/static/images/Idyllum_icon-target_C.svg" alt="Run a free OWASP ZAP website security check at Idyllum Labs">
             </div>
             <div class="righty">
               Recherche
             </div>
-          </a>
         </RouterLink>
         </li>
         <li class="nav-item d-none">
@@ -36,15 +34,16 @@ import { RouterLink, RouterView } from 'vue-router';
             </div>
           </a>
         </li>
+
         <li class="nav-item ">
-          <a class="nav-link" href="/browse/">
+          <RouterLink to="/about" class="nav-link">
             <div class="lefty">
               <img src="https://www.idyllum.com/static/images/Idyllum_icon-folder_C.svg" alt="Browse security reports by used software">
             </div>
             <div class="righty">
               Listes
             </div>
-          </a>
+        </RouterLink>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/home/">
@@ -52,6 +51,7 @@ import { RouterLink, RouterView } from 'vue-router';
               <img src="https://www.idyllum.com/static/images/Idyllum_icon-windows_C.svg" alt="Idyllum Labs Security dashboard. Online OWASP ZAP">
             </div>
             <div class="righty">
+              
               Dashboard
             </div>
           </a>
