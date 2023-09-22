@@ -50,20 +50,6 @@ import { RouterLink } from 'vue-router';
             <div class="lefty">
               <img src="https://www.idyllum.com/static/images/Idyllum_icon-windows_C.svg" alt="Idyllum Labs Security dashboard. Online OWASP ZAP">
             </div>
-            <div class="righty">
-              
-              Dashboard
-            </div>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/accounts/logout/">
-            <div class="lefty">
-              <img src="https://www.idyllum.com/static/images/Idyllum_icon-button_C.svg" alt="Idyllum Labs Security dashboard. Online OWASP ZAP">
-            </div>
-            <div class="righty">
-              Logout
-            </div>
           </a>
         </li>
       </ul>
