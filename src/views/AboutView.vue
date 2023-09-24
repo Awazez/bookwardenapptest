@@ -61,6 +61,7 @@
           console.error("L'objet book est indéfini ou n'a pas d'ID.");
           return;
       }
+      
   
       isHeartFilled[book.id] = !isHeartFilled[book.id];
   
