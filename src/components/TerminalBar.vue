@@ -10,12 +10,9 @@
       Hello traveller and bienvenue sur Bookwarden Labs.
       <br>
       <br>
-      Vous êtes entrain de regarder application pour livres avec un moteur de recherche qui va vous permettre de trouver n'importe quels livres !
+      Vous êtes entrain de regarder  une application pour livres avec un moteur de recherche qui va vous permettre de trouver n'importe quel livre !
       <br>
-      Entrer le nom d'auteur ou le titre désiré dans la bar de recherche pour commencer. Notre système fera tournée Google books API pour réaliser votre recherche.
-      <br>
-      <br>
-      pour commencer.
+      Entrer le nom d'auteur ou le titre désiré dans la barre de recherche pour commencer. Notre système utilise Google books API pour réaliser votre recherche.
       <br>
       <br>
       Amusez vous et lisez des livres.
