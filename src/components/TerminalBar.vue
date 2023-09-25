@@ -15,10 +15,6 @@
       Entrer le nom d'auteur ou le titre désiré dans la bar de recherche pour commencer. Notre système fera tournée Google books API pour réaliser votre recherche.
       <br>
       <br>
-      Nous vous laissons aussi explorer notre jeu de donnée. Essayer quelques  
-      <a href="#" data-bs-toggle="modal" data-bs-target="#idyllumModalUnified">
-        exemple
-      </a>
       pour commencer.
       <br>
       <br>

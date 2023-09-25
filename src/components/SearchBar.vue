@@ -18,12 +18,8 @@
         </p>
       </div>
       <div class="subtitle-input col-12 col-xl-8">
-        a. Faîtes une recherche en tapant le nom de l'auteur ou le titre du livres 
+        1. Faîtes une recherche en tapant le nom de l'auteur ou le titre du livres 
         <br>
-        b. Explorer notre base de donnée en utilisant nos 
-        <a href="#" data-bs-toggle="modal" data-bs-target="#idyllumModalUnified">
-          puissant filtres 
-        </a>
       </div>
     </div>
   </div>
