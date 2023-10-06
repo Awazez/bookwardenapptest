@@ -18,7 +18,7 @@
         </p>
       </div>
       <div class="subtitle-input col-12 col-xl-8">
-        1. Faîtes une recherche en tapant le nom de l'auteur ou le titre du livres 
+        Faîtes une recherche en tapant le nom de l'auteur ou le titre du livres 
         <br>
       </div>
     </div>
