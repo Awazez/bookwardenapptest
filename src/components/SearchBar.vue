@@ -13,7 +13,7 @@
         </div>
         <p class="small mt-2 text-end w-100 idyllum-howto d-block snipcss0-1-1-6">
           <span @click="ClearSearch" class="text-deepsaffron cursorpointer snipcss0-2-6-7">
-            [ clear ]
+            [ clear ] 
           </span>
         </p>
       </div>
@@ -76,11 +76,14 @@ async function apicall() {
     noResults.value = false;
 
     try {
-        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search.value}&maxResults=15`);
+        // Utilisez encodeURIComponent pour le terme de recherche
+        const encodedSearchValue = encodeURIComponent(search.value);
+        
+        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${encodedSearchValue}&maxResults=15`);
         isLoading.value = false;
 
         if (response.data.items) {
-          router.replace({ name: 'search', query: { q: search.value } });
+            router.replace({ name: 'search', query: { q: search.value } });
         } else {
             noResults.value = true;
         }
